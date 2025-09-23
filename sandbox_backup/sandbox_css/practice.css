@@ -1,0 +1,386 @@
+
+
+/* The next lines override the browser's margin and padding defaults */
+
+*{
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+    }
+
+    body {
+    
+        font-family: system-ui, -apple-system, sans-serif;
+
+        line-height: 1.6;
+
+        color: #333;
+    }
+
+    nav {
+        background-color: #fff;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+header {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+   
+    background-color: #eedef6 ; 
+
+    
+    align-items: center;
+    padding: 2 rem;
+   
+    height: 60vh;
+   
+}
+
+.header_text {
+
+    background-color: #c27bfb;
+    flex: 1;
+    padding: 2 rem;
+
+}
+
+.header_pic {
+    flex: 1;
+    background-color: #e9ecef;
+    min-height: 300px;
+    max-width: 400px;
+    border-radius: 8px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    color: #333; 
+}
+
+.header_pic img {
+    width: 100%;
+    height: 100%;
+    max-width: 400px; /* ADDED: Prevents image from exceeding reasonable size */
+    max-height: 400px; /* ADDED: Maintains square-ish proportions */
+    object-fit: cover; /* Maintains aspect ratio while filling container */
+    border-radius: 8px; /* Matches container border radius */
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #28a745;
+}
+
+main{
+    max-width: 65ch; 
+    margin: 0 auto; 
+    padding: 5%; 
+}
+
+/* Apply to your main container that holds all sections */
+main {
+  display: grid;
+  gap: 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Responsive container padding */
+@media (min-width: 768px) {
+  main {
+    padding: 1.5rem;
+  }
+}
+
+/* Consistent section spacing */
+
+
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 3rem 0;
+  align-items: center;
+}
+
+/* On larger screens, create a 2-column layout */
+@media (min-width: 768px) {
+  .about-section {
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+  }
+}
+
+.about-image {
+  justify-self: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.about-text {
+    flex: 2;
+    min-width: 250px;}
+
+    /* End of .about addition */
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.skill-card h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+section {
+    margin-bottom: 2 rem;
+}
+
+p+p {
+    margin-top: 1 rem;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-card {
+  padding: 2rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.project-card h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.project-card p {
+  margin-bottom: 0.5rem;
+}
+
+
+h1 {
+    color: #4d1979;
+    background-color:blanchedalmond;
+    font-size: 2.5 rem;
+    font-weight: 700;
+    margin-bottom: 1 rem;
+    line-height: 1.2;
+}
+
+/* Consistent container behavior for all major sections */
+header,
+main,
+footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Main element gets additional grid layout */
+main {
+  display: grid;
+  gap: 6rem;
+  padding: 2rem;
+}
+
+/* Consistent section headers */
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+/* ADDED: h3 styling as refrenced in lab promp */
+h3 {
+    color: #4d1979;
+    background-color:blanchedalmond;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+}
+
+/* ADDED: Additional paragraph styling for better spacing */
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #555; /* Slightly lighter for body text */
+}
+
+/* Main container for all sections */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive container padding */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Consistent section spacing */
+section {
+  padding: 3rem 0;
+}
+
+/* Section headings */
+section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+/* Add some visual interest to section headings */
+section h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #28a745;
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+/* Mobile styles (default) */
+main {
+  padding: 2rem 1rem;
+}
+
+/* Tablet and larger screens */
+@media (min-width: 768px) {
+  main {
+    padding: 2rem;
+  }
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* On tablets and up, show 2 columns */
+@media (min-width: 768px) {
+  .projects-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.project-card {
+  padding: 2rem;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.project-card h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+/* Mobile-first responsive adjustments */
+
+/* Small phones (320px and up) */
+.skills-container {
+  grid-template-columns: 1fr;
+}
+
+/* Large phones and small tablets (480px and up) */
+@media (min-width: 480px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 768px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .projects-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+  .skills-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
