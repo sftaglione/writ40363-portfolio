@@ -76,10 +76,7 @@ header {
     display: flex;
     flex-direction: row;
     gap: 2rem;
-   
-    background-color: #eedef6 ; 
-
-    
+  
     align-items: center;
     padding: 2 rem;
    
