@@ -6,7 +6,7 @@
  --heading-color: #4d1979;
  --text-color: #1f2937;
  --light-text: #6b7280;
- --background: #e1bcff;
+ --background: #d29ffb;
  --light-background: #f9fafb;
  --card-background: #f8f9fa;
  --card-border: #e9ecef;
@@ -16,417 +16,208 @@
  --link-hover: #007bff;
 }
 
-*{
- box-sizing: border-box;
- margin: 0;
- padding: 0;
-    }
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+:focus-visible{ outline:3px solid var(--accent-color); outline-offset:3px; }
 
-    body {
-        font-family: 'Tinos' , Lato;
-        line-height: 1.6;
-
-        color: #333;
-        background: var(--background);
-    }
-
-    a {
-      color: var(--primary color);
-    }
-
-    .secondary-text {
-      color: var(--light-text);
-    }
-
-    h1,h2,h3 {
-      font-family: 'Zalando' , san-serif;
-    }
-
-    nav {
-        background-color: #fff;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid #e9ecef;
-    }
-
-    h1 {
-      color: var(--heading -color);
-      font-size: clamp(1.7rem, 5vw, 3.2rem)
-      font-weight: 600;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    h2 {
-      color: var(--heading -color);
-      font-size: clamp(1.5rem, 4vw, 2.5rem)
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-      line-height: 1.3;
-    }
-
-    h3 {
-      color: var(--heading -color);
-      font-size: clamp(1.2rem, 3vw, 1.2rem)
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      line-height: 1.4;
-    }
-
-header {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-  
-    align-items: center;
-    padding: 2 rem;
-   
-    height: 60vh;
-   
+body{
+  font-family:'Tinos', Lato, serif;
+  line-height:1.6;
+  color:#000;
+  background:var(--background);
 }
 
-.header_text {
+a{ color:var(--primary-color); text-decoration:none; }
+a:hover{ color:var(--accent-color); }
 
-    background-color: #e1bcff;
-    flex: 1;
-    padding: 2 rem;
+.secondary-text{ color:var(--light-text); }
 
+h1,h2,h3{ font-family:'Lato', sans-serif; }
+h1{
+  color:var(--heading-color);
+  font-size:clamp(1.7rem,5vw,3.2rem);
+  font-weight:700;
+  margin-bottom:1rem;
+  line-height:1.2;
+}
+h2{
+  color:var(--heading-color);
+  font-size:clamp(1.5rem,4vw,2.5rem);
+  font-weight:700;
+  margin-bottom:.8rem;
+  line-height:1.3;
+}
+h3{
+  color:var(--heading-color);
+  font-size:clamp(1.1rem,3vw,1.25rem);
+  font-weight:600;
+  margin-bottom:.6rem;
+  line-height:1.4;
 }
 
-.header_pic {
-    flex: 1;
-    background-color: #e9ecef;
-    min-height: 300px;
-    max-width: 400px;
-    border-radius: 8px;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    color: #333; 
+/* =======================
+   Nav & Header (Hero)
+======================= */
+.nav-container{
+  position:sticky; top:0; z-index:20;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 2rem; background:#fff;
+  border-bottom:1px solid var(--card-border);
+  box-shadow:0 2px 4px rgba(0,0,0,.06);
+}
+.logo{ font-size:1.25rem; font-weight:800; color:#000; }
+.nav-links{ display:flex; gap:2rem; }
+.nav-links a{ color:#000; font-weight:600; }
+.nav-links a:hover{ color:var(--accent-color); }
+
+header{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:2rem;
+  display:flex; 
+  gap:2rem; 
+  align-items:center;
+  border-bottom:3px solid var(--card-border);
+}
+.header_text{ flex:1; padding:2rem; background:transparent; }
+.header_pic{
+  flex:1; 
+  background:#fff; 
+  min-height:300px; 
+  max-width:400px;
+  border-radius:8px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+}
+.header_pic img{
+  width:100%; 
+  height:100%; 
+  max-width:400px; 
+  max-height:400px;
+  object-fit:cover; 
+  border-radius:8px;
+  /* add a consistent white border */
+  border: 15px solid #ffffff; 
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15); /* optional for depth */
 }
 
-.header_pic img {
-    width: 100%;
-    height: 100%;
-    max-width: 400px; /* ADDED: Prevents image from exceeding reasonable size */
-    max-height: 400px; /* ADDED: Maintains square-ish proportions */
-    object-fit: cover; /* Maintains aspect ratio while filling container */
-    border-radius: 8px; /* Matches container border radius */
-}
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.logo {
-  font-size: 1.25rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #2c3e50;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #28a745;
-}
+/* =======================
+   Layout
+======================= */
+.container{ max-width:1000px; 
+  margin:0 auto; 
+  padding:0 1rem; }
+@media (min-width:768px){ .container{ padding:0 2rem; } }
 
 main{
-    max-width: 65ch; 
-    margin: 0 auto; 
-    padding: 5%; 
+  max-width:var(--container);
+  margin:0 auto;
+  display:grid;
+  gap:6rem;
+  padding:2rem;
 }
 
-/* Apply to your main container that holds all sections */
-main {
-  display: grid;
-  gap: 4rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 1rem;
+section{ padding:3rem 0; }
+section h2{
+  text-align:center; 
+  font-size:2rem; 
+  margin-bottom:2rem; 
+  color:#000;
+}
+section h2::after{
+  content:''; 
+  display:block; 
+  width:50px; 
+  height:3px; 
+  background:var(--accent-color);
+  margin:1rem auto 0; 
+  border-radius:2px;
 }
 
-/* Responsive container padding */
-@media (min-width: 768px) {
-  main {
-    padding: 1.5rem;
-  }
+/* paragraphs & spacing */
+p{ font-size:1rem; 
+  margin-bottom:1rem; 
+  color:#000; }
+p + p{ margin-top:1rem; }
+
+/* =======================
+   About
+======================= */
+.about-section{
+  display:grid; 
+  grid-template-columns:1fr; 
+  gap:2rem;
+  padding:3rem 0;
+  align-items:center; 
+  background:#fff; 
+  border-radius:8px;
+  box-shadow:var(--card-shadow);
 }
-
-/* Consistent section spacing */
-
-
-.about-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  padding: 3rem 0;
-  align-items: center;
+@media (min-width:768px){
+  .about-section{ grid-template-columns:250px 1fr; 
+    gap:3rem; padding:4rem 3rem; }
 }
+.about-image{ justify-self:center; }
+.about-image img{ width:100%; 
+  max-width:250px; 
+  height:auto; 
+  border-radius:8px; }
 
-/* On larger screens, create a 2-column layout */
-@media (min-width: 768px) {
-  .about-section {
-    grid-template-columns: 250px 1fr;
-    gap: 3rem;
-  }
+/* =======================
+   Skills
+======================= */
+.skills-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:1rem; 
+  margin-top:2rem;
 }
-
-.about-image {
-  justify-self: center;
+.skill-card{
+  padding:1.5rem; 
+  background:var(--card-background); 
+  border-radius:8px;
+  text-align:center; 
+  border:1px solid var(--card-border);
+  box-shadow:var(--card-shadow);
 }
+.skill-card h3{ color:#111; margin-bottom:.5rem; }
 
-.about-image img {
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  border-radius: 8px;
+/* =======================
+   Projects
+======================= */
+.projects-container{
+  display:grid; 
+  grid-template-columns:1fr; 
+  gap:2rem; 
+  margin-top:2rem;
 }
-
-.about-text {
-    flex: 2;
-    min-width: 250px;}
-
-    /* End of .about addition */
-
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+@media (min-width:768px){
+  .projects-container{ grid-template-columns:1fr 1fr; }
 }
-
-.skill-card {
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  text-align: center;
-  border: 1px solid #e9ecef;
+.project-card{
+  padding:2rem; 
+  background:#fff; 
+  border:1px solid var(--card-border);
+  border-radius:8px; 
+  box-shadow:var(--card-shadow);
+  transition:transform .3s ease, box-shadow .3s ease;
 }
+.project-card:hover{ transform:translateY(-2px); box-shadow:var(--card-shadow-hover); }
+.project-card h3{ color:#111; margin-bottom:1rem; }
 
-.skill-card h3 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
+/* =======================
+   Contact
+======================= */
+#contact{ scroll-margin-top: var(--nav-height); }
 
-section {
-    margin-bottom: 2 rem;
-}
-
-p+p {
-    margin-top: 1 rem;
-}
-
-.projects-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.project-card {
-  padding: 2rem;
-  background: white;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.project-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-.project-card p {
-  margin-bottom: 0.5rem;
-}
-
-
-h1 {
-    color: #4d1979;
-    background-color:blanchedalmond;
-    font-size: 2.5 rem;
-    font-weight: 700;
-    margin-bottom: 1 rem;
-    line-height: 1.2;
-}
-
-/* Consistent container behavior for all major sections */
-header,
-main,
-footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Main element gets additional grid layout */
-main {
-  display: grid;
-  gap: 6rem;
-  padding: 2rem;
-}
-
-/* Consistent section headers */
-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  position: relative;
-}
-
-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  border-radius: 2px;
-}
-
-/* ADDED: h3 styling as refrenced in lab promp */
-h3 {
-    color: #4d1979;
-    background-color:blanchedalmond;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    line-height: 1.4;
-}
-
-/* ADDED: Additional paragraph styling for better spacing */
-p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #555; /* Slightly lighter for body text */
-}
-
-/* Main container for all sections */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Responsive container padding */
-@media (min-width: 768px) {
-  .container {
-    padding: 0 2rem;
-  }
-}
-
-/* Consistent section spacing */
-section {
-  padding: 3rem 0;
-}
-
-/* Section headings */
-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #2c3e50;
-}
-
-/* Add some visual interest to section headings */
-section h2::after {
-  content: '';
-  display: block;
-  width: 50px;
-  height: 3px;
-  background: #28a745;
-  margin: 1rem auto 0;
-  border-radius: 2px;
-}
-
-/* Mobile styles (default) */
-main {
-  padding: 2rem 1rem;
-}
-
-/* Tablet and larger screens */
-@media (min-width: 768px) {
-  main {
-    padding: 2rem;
-  }
-}
-
-.projects-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-/* On tablets and up, show 2 columns */
-@media (min-width: 768px) {
-  .projects-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.project-card {
-  padding: 2rem;
-  background: white;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.project-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-/* Mobile-first responsive adjustments */
-
-/* Small phones (320px and up) */
-.skills-container {
-  grid-template-columns: 1fr;
-}
-
-/* Large phones and small tablets (480px and up) */
-@media (min-width: 480px) {
-  .skills-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
-
-/* Tablets (768px and up) */
-@media (min-width: 768px) {
-  .skills-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .projects-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* Desktop (1024px and up) */
-@media (min-width: 1024px) {
-  .skills-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
+/* =======================
+   Mobile header stack
+======================= */
+@media (max-width:767px){
+  header{ flex-direction:column; 
+    padding:1.5rem; }
+  .header_text{ padding:1rem; }
+  .header_pic{ max-width:320px; }
 }
