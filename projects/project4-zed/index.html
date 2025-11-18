@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDK U Pick – Decision Maker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>IDK You Pick 🤷‍♀️</h1>
+    <p>My cute little decision helper.</p>
+  </header>
+
+  <main>
+    <!-- Add Option Form -->
+    <section class="add-option">
+      <h2>Add an Option</h2>
+      <form id="option-form">
+        <input type="text" id="option-text" placeholder="e.g., Chipotle" />
+        
+        <select id="option-category">
+          <option value="">Choose category</option>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Fun">Fun</option>
+          <option value="Fitness">Fitness</option>
+          <option value="Chores">Chores</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <button type="submit">Add</button>
+      </form>
+
+      <p id="error-message" class="error"></p>
+    </section>
+
+    <!-- Current Options -->
+    <section class="options-list">
+  <h2>Your Options</h2>
+  <button id="clear-options-btn" class="secondary-btn">Clear All Options</button>
+  <ul id="options-container"></ul>
+</section>
+
+    <!-- Random Pick -->
+    <section class="random-picker">
+      <button id="pick-btn">Pick For Me 🎉</button>
+      <div id="result"></div>
+    </section>
+
+    <!-- History -->
+    <section class="history">
+  <h2>Past Picks</h2>
+  <button id="clear-history-btn" class="secondary-btn">Clear History</button>
+  <ul id="history-container"></ul>
+
+   <div class="stats">
+      <h3>Stats</h3>
+      <p id="stats-summary">No picks yet. Start deciding!</p>
+      <canvas id="history-chart" aria-label="Decisions by category" role="img"></canvas>
+    </div>
+  </section>
+
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Your JS file -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
