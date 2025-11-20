@@ -165,71 +165,187 @@ function setupQuotesButton() {
 setupQuotesButton();
 
 // ========================================
+// COPY QUOTE TO CLIPBOARD (Enhancement)
+// ========================================
+
+function setupCopyQuoteButton() {
+  const copyBtn = document.getElementById("copy-quote-btn");
+
+  if (!copyBtn) {
+    console.log("Copy Quote button not found");
+    return;
+  }
+
+  copyBtn.addEventListener("click", () => {
+    console.log("Copy Quote clicked!");
+
+    const quoteTextEl = document.querySelector(".quote-text");
+    const quoteAuthorEl = document.querySelector(".quote-author");
+
+    if (!quoteTextEl) {
+      alert("No quote to copy yet!");
+      return;
+    }
+
+    const quoteText = quoteTextEl.textContent.trim();
+    const quoteAuthor = quoteAuthorEl
+      ? quoteAuthorEl.textContent.trim()
+      : "";
+
+    const fullQuote = quoteAuthor
+      ? `${quoteText}\n${quoteAuthor}`
+      : quoteText;
+
+    navigator.clipboard
+      .writeText(fullQuote)
+      .then(() => {
+        alert("Quote copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Clipboard error:", err);
+        alert("Sorry, unable to copy quote.");
+      });
+  });
+}
+
+// Initialize Copy Quote button
+setupCopyQuoteButton();
+
+// Call setupQuotesButton after DOM is loaded
+setupQuotesButton();
+
+
+// ========================================
+// COPY QUOTE TO CLIPBOARD (Enhancement)
+// ========================================
+
+function setupCopyQuoteButton() {
+  const copyBtn = document.getElementById("copy-quote-btn");
+
+  if (!copyBtn) {
+    console.log("Copy Quote button not found");
+    return;
+  }
+
+  copyBtn.addEventListener("click", () => {
+    console.log("Copy Quote clicked!");
+
+    const quoteTextEl = document.querySelector(".quote-text");
+    const quoteAuthorEl = document.querySelector(".quote-author");
+
+    if (!quoteTextEl) {
+      alert("No quote to copy yet!");
+      return;
+    }
+
+    const quoteText = quoteTextEl.textContent.trim();
+    const quoteAuthor = quoteAuthorEl ? quoteAuthorEl.textContent.trim() : "";
+
+    const fullQuote = quoteAuthor
+      ? `${quoteText}\n${quoteAuthor}`
+      : quoteText;
+
+    navigator.clipboard.writeText(fullQuote)
+      .then(() => {
+        alert("Quote copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Clipboard error:", err);
+        alert("Sorry, unable to copy quote.");
+      });
+  });
+}
+
+
+// Initialize Copy Quote button
+setupCopyQuoteButton();
+
+// ========================================
 // TASKS WIDGET (from LAB18)
 // ========================================
 
-// Function to load tasks from localStorage
+// Load tasks from localStorage
 function loadTasks() {
-  const tasksJSON = localStorage.getItem('dashboardTasks');
-
-  if (tasksJSON) {
-    return JSON.parse(tasksJSON);
-  } else {
-    return []; // Return empty array if no tasks yet
-  }
+  const tasksJSON = localStorage.getItem("dashboardTasks");
+  return tasksJSON ? JSON.parse(tasksJSON) : [];
 }
 
-// Function to save tasks to localStorage
+// Save to localStorage
 function saveTasks(tasks) {
-  localStorage.setItem('dashboardTasks', JSON.stringify(tasks));
-  console.log('Tasks saved:', tasks);
+  localStorage.setItem("dashboardTasks", JSON.stringify(tasks));
 }
 
-// Function to display all tasks
+// Display tasks
 function displayTasks() {
   const tasks = loadTasks();
-  const tasksList = document.getElementById('tasks-list');
+  const tasksList = document.getElementById("tasks-list");
 
-  // If no tasks, show message
   if (tasks.length === 0) {
-    tasksList.innerHTML = `
-      <div class="no-tasks">
-        No tasks yet. Add one above! ✨
-      </div>
-    `;
+    tasksList.innerHTML = `<div class="no-tasks">No tasks yet. Add one above! ✨</div>`;
     updateTaskStats(tasks);
     return;
   }
 
-  // Clear existing tasks
-  tasksList.innerHTML = '';
+  tasksList.innerHTML = "";
 
-  // Display each task
   tasks.forEach((task, index) => {
-    const taskItem = document.createElement('div');
-    taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+    const taskItem = document.createElement("div");
+    taskItem.className = `task-item ${task.completed ? "completed" : ""}`;
 
-    // Create checkbox
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
+    // --- Top Row: checkbox + text + delete button ---
+    const topRow = document.createElement("div");
+    topRow.className = "task-top-row";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
     checkbox.checked = task.completed;
-    checkbox.addEventListener('change', () => toggleTask(index));
+    checkbox.addEventListener("change", () => toggleTask(index));
 
-    // Create task text
-    const taskText = document.createElement('span');
-    taskText.className = 'task-text';
+    const taskText = document.createElement("span");
+    taskText.className = "task-text";
     taskText.textContent = task.text;
 
-    // Create delete button
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'btn-delete';
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.addEventListener('click', () => deleteTask(index));
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "btn-delete";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => deleteTask(index));
 
-    // Append all elements to task item
-    taskItem.appendChild(checkbox);
-    taskItem.appendChild(taskText);
-    taskItem.appendChild(deleteBtn);
+    topRow.appendChild(checkbox);
+    topRow.appendChild(taskText);
+    topRow.appendChild(deleteBtn);
+
+    taskItem.appendChild(topRow);
+
+    // --- Metadata Row: category + due date ---
+    const metaRow = document.createElement("div");
+    metaRow.className = "task-meta";
+
+    if (task.category) {
+      const cat = document.createElement("span");
+      cat.className = "task-category";
+      cat.textContent = `Category: ${task.category}`;
+      metaRow.appendChild(cat);
+    }
+
+    // Add meta info (category + due date)
+if (task.category || task.dueDate) {
+  const meta = document.createElement("div");
+  meta.className = "task-meta";
+
+  if (task.category) {
+    const cat = document.createElement("span");
+    cat.textContent = `Category: ${task.category}`;
+    meta.appendChild(cat);
+  }
+
+  if (task.dueDate) {
+    const due = document.createElement("span");
+    due.textContent = `Due: ${task.dueDate}`;
+    meta.appendChild(due);
+  }
+
+  taskItem.appendChild(meta);
+}
 
     tasksList.appendChild(taskItem);
   });
@@ -237,92 +353,131 @@ function displayTasks() {
   updateTaskStats(tasks);
 }
 
-// Function to add a new task
-function addTask(taskText) {
+// Add task
+function addTask(text, category, dueDate) {
   const tasks = loadTasks();
 
   const newTask = {
-    text: taskText,
+    text,
     completed: false,
-    id: Date.now() // Unique ID using timestamp
+    category,
+    dueDate,
+    id: Date.now(),
   };
 
   tasks.push(newTask);
   saveTasks(tasks);
   displayTasks();
-
-  console.log('Task added:', newTask);
 }
 
-// Set up form submission
+// Handle form submission
 function setupTaskForm() {
-  const taskForm = document.getElementById('task-form');
-  const taskInput = document.getElementById('task-input');
+  const form = document.getElementById("task-form");
+  const input = document.getElementById("task-input");
+  const category = document.getElementById("task-category");
+  const date = document.getElementById("task-date");
 
-  taskForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent page reload
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-    const taskText = taskInput.value.trim();
+    const textValue = input.value.trim();
+    if (!textValue) return;
 
-    if (taskText) {
-      addTask(taskText);
-      taskInput.value = ''; // Clear input
-      taskInput.focus(); // Focus back on input
-    }
+    addTask(textValue, category.value, date.value);
+
+    input.value = "";
+    date.value = "";
+    category.value = "personal";
   });
 }
 
-// Function to toggle task complete/incomplete
+// Toggle complete
 function toggleTask(index) {
   const tasks = loadTasks();
   tasks[index].completed = !tasks[index].completed;
   saveTasks(tasks);
   displayTasks();
-
-  console.log('Task toggled:', tasks[index]);
 }
 
-// Function to delete a task
+// Delete task
 function deleteTask(index) {
   const tasks = loadTasks();
-  const taskToDelete = tasks[index];
-
-  // Optional: Confirm before deleting
-  if (confirm(`Delete task: "${taskToDelete.text}"?`)) {
+  if (confirm(`Delete task: "${tasks[index].text}"?`)) {
     tasks.splice(index, 1);
     saveTasks(tasks);
     displayTasks();
-
-    console.log('Task deleted');
   }
 }
 
-// Function to update task statistics
+// Stats
 function updateTaskStats(tasks) {
-  const statsDiv = document.getElementById('task-stats');
+  const statsDiv = document.getElementById("task-stats");
 
-  const totalTasks = tasks.length;
-  const completedTasks = tasks.filter(task => task.completed).length;
-  const pendingTasks = totalTasks - completedTasks;
-
-  if (totalTasks === 0) {
-    statsDiv.innerHTML = '';
-    return;
-  }
-
-  const completionPercentage = Math.round((completedTasks / totalTasks) * 100);
+  const total = tasks.length;
+  const completed = tasks.filter((t) => t.completed).length;
+  const pending = total - completed;
+  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
 
   statsDiv.innerHTML = `
-    <div class="stat">Total: <strong>${totalTasks}</strong></div>
-    <div class="stat">Completed: <strong>${completedTasks}</strong></div>
-    <div class="stat">Pending: <strong>${pendingTasks}</strong></div>
-    <div class="stat">Progress: <strong>${completionPercentage}%</strong></div>
+    <div class="stat">Total: <strong>${total}</strong></div>
+    <div class="stat">Completed: <strong>${completed}</strong></div>
+    <div class="stat">Pending: <strong>${pending}</strong></div>
+    <div class="stat">Progress: <strong>${percent}%</strong></div>
   `;
 }
 
-// Initialize tasks when page loads
+// Call these when page loads initializeTheme();
 displayTasks();
 setupTaskForm();
+
+// ========================================
+// PERSONALIZED WELCOME MESSAGE (Enhancement)
+// ========================================
+
+function updateWelcomeMessage(name) {
+  const subtitle = document.querySelector(".dashboard-subtitle");
+  if (!subtitle) return;
+
+  if (name && name.trim() !== "") {
+    subtitle.textContent = `Welcome back, ${name}! Here's your day at a glance.`;
+  } else {
+    subtitle.textContent = `Welcome back! Here's your day at a glance.`;
+  }
+}
+
+function loadUserName() {
+  const savedName = localStorage.getItem("dashboardUserName");
+  updateWelcomeMessage(savedName);
+}
+
+function changeUserName() {
+  const currentName = localStorage.getItem("dashboardUserName") || "";
+  const newName = prompt("What name should I use for your dashboard?", currentName);
+
+  // If user clicks Cancel, do nothing
+  if (newName === null) return;
+
+  const trimmed = newName.trim();
+
+  // Save name (or clear if empty)
+  if (trimmed) {
+    localStorage.setItem("dashboardUserName", trimmed);
+  } else {
+    localStorage.removeItem("dashboardUserName");
+  }
+
+  updateWelcomeMessage(trimmed);
+}
+
+function setupNameButton() {
+  const nameBtn = document.getElementById("change-name-btn");
+  if (!nameBtn) return;
+
+  nameBtn.addEventListener("click", () => {
+    console.log("Change Name clicked");
+    changeUserName();
+  });
+}
 
 // Theme Management
 function initializeTheme() {
@@ -370,13 +525,5 @@ function setupThemeToggle() {
 // Call these when page loads
 initializeTheme();
 setupThemeToggle();
-
-
-
-
-
-
-
-
-
-
+loadUserName();
+setupNameButton();

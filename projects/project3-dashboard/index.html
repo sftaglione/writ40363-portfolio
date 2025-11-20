@@ -9,16 +9,22 @@
 <body>
 
   <header class="dashboard-header">
-  <div class="header-content">
-    <div>
-      <h1>My Personal Dashboard</h1>
-      <p class="dashboard-subtitle">Welcome back! Here's your day at a glance.</p>
+    <div class="header-content">
+      <div>
+        <h1>My Personal Dashboard</h1>
+        <p class="dashboard-subtitle">Welcome back! Here's your day at a glance.</p>
+
+        <!-- Enhancement: button to change saved name -->
+        <button id="change-name-btn" class="btn-secondary" type="button">
+          Change Name
+        </button>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+      </button>
     </div>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-      <span class="theme-icon">🌙</span>
-    </button>
-  </div>
-</header>
+  </header>
 
   <div class="dashboard">
     <!-- Weather Widget -->
@@ -35,7 +41,18 @@
       <div id="quotes-display">
         <!-- Quote will appear here -->
       </div>
-      <button id="new-quote-btn" class="btn-primary">New Quote</button>
+
+      <!-- Enhancement: wrap quote buttons together -->
+      <div class="quote-actions">
+        <button id="new-quote-btn" class="btn-primary" type="button">
+          New Quote
+        </button>
+
+        <!-- Enhancement: copy quote to clipboard -->
+        <button id="copy-quote-btn" class="btn-secondary" type="button">
+          Copy Quote
+        </button>
+      </div>
     </section>
 
     <!-- Tasks Widget -->
@@ -50,6 +67,20 @@
           placeholder="Add a new task..."
           required
         />
+
+        <!-- Enhancement: task category dropdown -->
+        <select id="task-category">
+          <option value="personal">Personal</option>
+          <option value="school">School</option>
+          <option value="work">Work</option>
+        </select>
+
+        <!-- Enhancement: task due date -->
+        <input
+          type="date"
+          id="task-date"
+        />
+
         <button type="submit" class="btn-primary">Add Task</button>
       </form>
 
