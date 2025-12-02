@@ -18,6 +18,7 @@ const clearHistoryBtn = document.getElementById("clear-history-btn");
 const clearOptionsBtn = document.getElementById("clear-options-btn");
 const statsSummary = document.getElementById("stats-summary");
 const historyChartCanvas = document.getElementById("history-chart");
+const wheel = document.getElementById("wheel");
 
 // ---------- LOCAL STORAGE HELPERS ----------
 const STORAGE_KEYS = {
@@ -69,6 +70,65 @@ form.addEventListener("submit", (e) => {
   optionCategory.value = "";
 });
 
+function buildWheel() {
+  console.log("🔧 buildWheel() called");
+  console.log("📊 Options:", options);
+  
+  if (!wheel) {
+    console.error("❌ Wheel element not found!");
+    return;
+  }
+  
+  wheel.innerHTML = "";
+
+  if (options.length === 0) {
+    console.log("⚠️ No options, hiding wheel");
+    wheel.style.display = "none";
+    return;
+  }
+
+  console.log(`✅ Building wheel with ${options.length} options`);
+  wheel.style.display = "block";
+
+  const sliceAngle = 360 / options.length;
+
+  options.forEach((opt, index) => {
+    console.log(`🎨 Creating slice ${index}: "${opt.text}"`); // Debug each slice
+    
+    const slice = document.createElement("div");
+    slice.classList.add("wheel-section");
+
+    const rotation = sliceAngle * index;
+    const skew = 90 - sliceAngle;
+    
+    slice.style.transform = `
+      rotate(${rotation}deg)
+      skewY(${skew}deg)
+    `;
+
+    slice.style.background = index % 2 === 0 ? "#ff2997" : "#cc5effff";
+
+    const label = document.createElement("div");
+    label.classList.add("slice-label");
+    label.textContent = opt.text;
+    
+    // Add title attribute so you can hover to see full text
+    label.title = opt.text;
+
+    label.style.transform = `
+      skewY(${-skew}deg)
+      rotate(${sliceAngle / 2}deg)
+    `;
+
+    slice.appendChild(label);
+    wheel.appendChild(slice);
+    
+    console.log(`✅ Slice ${index} added to wheel`);
+  });
+  
+  console.log("✅ Wheel complete!");
+}
+
 // ---------- RENDER OPTIONS ----------
 function renderOptions() {
   optionsContainer.innerHTML = "";
@@ -77,6 +137,7 @@ function renderOptions() {
     const empty = document.createElement("li");
     empty.textContent = "No options yet. Add a few above!";
     optionsContainer.appendChild(empty);
+    buildWheel(); // Update wheel even when empty
     return;
   }
 
@@ -89,6 +150,9 @@ function renderOptions() {
     `;
     optionsContainer.appendChild(li);
   });
+
+// ⭐️ Build wheel after rendering options
+  buildWheel();
 }
 
 // ---------- DELETE OPTION (EVENT DELEGATION) ----------
@@ -98,39 +162,65 @@ optionsContainer.addEventListener("click", (event) => {
     const id = Number(li.dataset.id);
     options = options.filter((opt) => opt.id !== id);
     saveToStorage();
-    renderOptions();
+    renderOptions(); // This will rebuild the wheel
   }
 });
 
-// ---------- PICK RANDOM OPTION ----------
 pickBtn.addEventListener("click", () => {
   if (options.length === 0) {
     result.textContent = "Add some options first!";
+    result.classList.remove("bounce");
     return;
   }
 
+  // Reset wheel rotation first
+  wheel.style.transition = "none";
+  wheel.style.transform = "rotate(0deg)";
+  
+  // Force reflow
+  wheel.offsetHeight;
+  
+  // Re-enable transition
+  wheel.style.transition = "transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)";
+
+// Choose a random option
   const randomIndex = Math.floor(Math.random() * options.length);
   const selection = options[randomIndex];
 
-  // little “animation” reset
+  // Calculate final angle
+  const sliceAngle = 360 / options.length;
+  const targetAngle = sliceAngle * randomIndex;
+  const finalAngle = (360 * 5) + targetAngle; // 5 full spins + target
+
+  console.log(`🎯 Spinning to index ${randomIndex}: ${selection.text}`);
+  console.log(`🎡 Final angle: ${finalAngle}deg`);
+
+  wheel.style.transform = `rotate(${finalAngle}deg)`;
+
+  // Clear previous result
+  result.textContent = "Spinning...";
   result.classList.remove("bounce");
-  void result.offsetWidth; // forces reflow so animation can replay
-  result.classList.add("bounce");
 
-  result.textContent = `You should choose: ${selection.text} 🎉`;
+  // AFTER spin finishes (4 seconds)
+  setTimeout(() => {
+    result.textContent = `You should choose: ${selection.text} 🎉`;
+    result.classList.add("bounce");
 
-  const entry = {
-    id: Date.now(),
-    text: selection.text,
-    category: selection.category,
-    pickedAt: new Date().toLocaleString(),
-  };
+    // Save to history
+    const entry = {
+      id: Date.now(),
+      text: selection.text,
+      category: selection.category,
+      pickedAt: new Date().toLocaleString(),
+    };
 
-  history.push(entry);
-  saveToStorage();
-  renderHistory();
-  updateStatsAndChart();
+ history.push(entry);
+    saveToStorage();
+    renderHistory();
+    updateStatsAndChart();
+  }, 4000);
 });
+
 
 // ---------- RENDER HISTORY ----------
 function renderHistory() {

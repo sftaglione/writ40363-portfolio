@@ -79,3 +79,54 @@ button:hover {
   color: red;
   margin-top: 8px;
 }
+
+.wheel-container {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+#wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 8px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+  transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ...existing code... */
+
+.wheel-section {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 0%;
+  overflow: visible;
+}
+
+.slice-label {
+  position: absolute;
+  right: 40%;  /* Move toward inner edge */
+  top: 20%;   /* Position near the top of the slice */
+  
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+
+  width: 70px;
+  text-align: center;
+  pointer-events: none;
+
+  text-shadow: 
+    1px 1px 3px rgba(0,0,0,0.7),
+    0 0 8px rgba(0,0,0,0.5);
+  
+  /* Allow text to wrap if too long */
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
