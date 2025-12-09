@@ -15,3 +15,6 @@ Next time, I would start earlier on the more complex feature—like the wheel an
 
 How has your confidence as a developer changed?
 Honestly, it skyrocketed. Before this class, I couldn’t write a single JavaScript function. Now I built a full mini-app with animations, charts, event listeners, objects, storage, and a custom UI. I actually feel like I can open VS Code and make whatever I want, not just beginners’ examples. Using AI also boosted my confidence because it showed me that coding isn’t about knowing everything—it’s about knowing how to problem-solve, ask good questions, experiment, and not give up when something breaks. I went from scared of code to proud of the project I built—and excited to build more.
+
+Live Demo:
+🔗 https://sftaglione.github.io/writ40363-portfolio/projects/project4-zed/index.html
