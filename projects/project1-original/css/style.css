@@ -120,6 +120,21 @@ header{
   box-shadow: 0 4px 16px rgba(0,0,0,0.15); /* optional for depth */
 }
 
+.resume-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.resume-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
 
 /* Layout */
 .container{ max-width:1000px; 
@@ -158,27 +173,39 @@ p{ font-size:1rem;
   color:#000; }
 p + p{ margin-top:1rem; }
 
-/* About */
-.about-section{
-  display:grid; 
-  grid-template-columns:1fr; 
-  gap:2rem;
-  padding:3rem 0;
-  align-items:center; 
-  background:#fff; 
-  border-radius:8px;
-  box-shadow:var(--card-shadow);
+#about {
+    text-align: center;
+    margin-bottom: 60px;
 }
-@media (min-width:768px){
-  .about-section{ grid-template-columns:250px 1fr; 
-    gap:3rem; 
-    padding:4rem 3rem; }
+
+#about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
-.about-image{ justify-self:center; }
-.about-image img{ width:100%; 
-  max-width:250px; 
-  height:auto; 
-  border-radius:8px; }
+
+.about-box {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+}
+
+.about-image img {
+    width: 350px;
+    border-radius: 12px;
+}
+
+.about-text {
+    text-align: left;
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
 
 /* Skills */
 .skills-container{
@@ -257,4 +284,52 @@ p + p{ margin-top:1rem; }
     padding:1.5rem; }
   .header_text{ padding:1rem; }
   .header_pic{ max-width:320px; }
+}
+
+/* PERSONAL PROJECT BOXES */
+#personal-projects .project-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.project-box {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.project-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.project-box a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 600;
+    color: #4b2c6f;
+}
+
+#resume {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.resume-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.resume-container img {
+    width: 60%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
